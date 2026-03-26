@@ -1,21 +1,28 @@
 import java.util.Random;
 import java.util.Scanner;
 
-/*this are all the data. And because we are creating a dictionary jargons for it it need to be a sequnece (a-z)
-so i used binary sarch - Sigmund Sayabo
+/*this are all the data. And because we are creating a dictionary jargons for IT it should be alphabetical (a-z)
+so i used binary sarch - Sigmund Sayabo.
 
   */ 
 
 public class IT_Dictionary {
 
-// i put the array container here sa public class para ma call siya sa any method and use static. - Sigmund.
+ static String[] data = new String[16];
+// I put the array container here sa public class para ma call siya sa any method and use static. - Sigmund Sayabo.
+   
     static Scanner input = new Scanner(System.in); 
-    static Random random = new Random();
-    static String[] data = new String[16];
-    static String cleanInput ;// ge declare dri kay dli ma access sa displayResult na method - Kenneth Bantayan
-    public static void main(String[] args) {
+ //   Scanner input = new Scanner(System.in); need e gawas kay local lng sya need ma access sa gawas - Kenneth Bantayan  
 
-    // and mao ni ang data tanan.
+ static Random random = new Random();
+    
+    
+ static String cleanInput ; 
+ // ge declare dri kay dli ma access sa displayResult na method - Kenneth Bantayan
+ 
+ public static void main(String[] args) {
+
+    //  mao ni ang hard coded na data tanan.
         
         data[0] = "API: Application Programming Interface; a set of rules for building software.";
         data[1] = "Bandwidth: The maximum amount of data that can be transmitted over a network.";
@@ -36,7 +43,7 @@ public class IT_Dictionary {
 
     
 
-    //Famoso
+    //Gilmer Famoso
     run();
     }
     
@@ -62,7 +69,8 @@ public class IT_Dictionary {
 
             choice = readInt("Enter your choice: ");
             System.out.println();
-            // add diri ang name sa method 
+          
+         // add diri ang name sa method 
             switch (choice) {
                 case 1:
                     searchExactTerm();
@@ -103,15 +111,20 @@ public class IT_Dictionary {
 
             if (choice != 0) {
                 System.out.println();
-                pause();
+                pause(); 
             }
 
         } while (choice != 0);
     }
-    static void searchExactTerm() {
-        while (true) {
-
-        // enter user input
+   
+ //------------------------------------------------------------------------------------------------------
+ 
+ static void searchExactTerm() {
+     
+  while (true) {
+ // gi dungagan nakog loop para di mag balik2 og run ang program after every search. - Benedict Guino-o.   
+      
+   // enter user input
         System.out.print("Search an IT term (or enter 1 to exit): ");
         String response = input.nextLine();
 
@@ -121,24 +134,32 @@ public class IT_Dictionary {
         
         int resultIndex = BinarySearch(data, cleanInput);
 
-        // not equal sa -1 means wala sa array list and word na gi pangita sa user.
-
-         //pag 1 ang gi enter sa user mu return ang displayResult method ug boolean na false
-         // i-check diri sa if condition kung false ang na return, 
-         //pag false, mu break ang loop - Rulona
-       if (!displayResult(resultIndex, response)){
+        /* not equal sa -1 means wala sa array list and word na gi pangita sa user.
+          pag 1 ang gi enter sa user mu return ang displayResult method ug boolean na false
+          i-check diri sa if condition kung false ang na return, 
+         pag false, mu break ang loop - Rulona
+         
+         */
+      
+   if (!displayResult(resultIndex, response)){
         break;
        }
     }
     }
     
-    static void showRandomTerm() {
+ //------------------------------------------------------------------------------------------------------------  
+
+ static void showRandomTerm() {
+       
         Random rand = new Random();
         int index = rand.nextInt(data.length);
         System.out.println(data[index]);
+  
     }
- 
-    static void pause() {
+
+ //------------------------------------------------------------------------------------------------------------  
+   
+ static void pause() {
         System.out.print("Press Enter to continue...");
         input.nextLine();
     }
@@ -156,20 +177,20 @@ public class IT_Dictionary {
     }
    
 
+//------------------------------------------------------------------------------------------------------------------------------
+   
+ 
 
-   //   Scanner input = new Scanner(System.in); need e gawas kay local lng sya need ma access sa gawas - Kenneth Bantayan
-     // gi dungagan nakog loop para di mag balik2 og run ang program after every search. - Benedict Guino-o.      
-       
-
-//Sigmund Sayabo
-        // methods sa logic BinarySearching 
-    
     public static int BinarySearch(String[] list, String target) {
 
+ /*Sigmund Sayabo
+   methods sa logic BinarySearching */
+    
+     
     // so ang formula is if word is not equal sa middle then maybe naa sa lower group or higher group.
         
         int low = 0;
-        int high = data.length - 1; // last index
+        int high = data.length - 1;  // last index
 
         
         while (low <= high) {
@@ -198,10 +219,14 @@ public class IT_Dictionary {
 
     }
 
- //gihimo an nako ug method ang pagdisplay sa result para limyo ang main - Rulona
- //ang argument kay ang resultIndex gikan sa binary search ug response sa user
+
+
  public static boolean displayResult(int resultIndex, String response) {
-    if (response.equals("1")) {
+ 
+ /*gihimo an nako ug method ang pag display sa result para limyo ang main - Rulona
+ ang argument kay ang resultIndex gikan sa binary search ug response sa user */  
+ 
+  if (response.equals("1")) {
         System.out.println("Exiting...");
         return false;
     } else if (resultIndex != -1) {
@@ -221,7 +246,9 @@ public class IT_Dictionary {
     return true;
     } 
 
-    public static int levenshteinDistance(String a, String b) {
+  //-----------------------------------------------------------------------------------------------------------------
+   
+ public static int levenshteinDistance(String a, String b) {
     int[][] dp = new int[a.length() + 1][b.length() + 1];
 
     for (int i = 0; i <= a.length(); i++) dp[i][0] = i;
@@ -242,10 +269,14 @@ public class IT_Dictionary {
 
     return dp[a.length()][b.length()];
  }
- // method for suggest word if ever ma misspelled using levenshteinDistance alghorihm - Joseph Mark  divino
- public static void suggestWords(String input) {
 
-    System.out.println("Suggestions:");
+ //---------------------------------------------------------------------------------------------------------------------------
+ 
+
+ public static void suggestWords(String input) {
+ // method for suggest word if ever ma misspelled using levenshteinDistance alghorihm - Joseph Mark  divino
+   
+  System.out.println("Suggestions:");
 
     int maxDistance = 3;
     boolean hasSuggestion = false;
@@ -256,8 +287,10 @@ public class IT_Dictionary {
 
         int distance = levenshteinDistance(input.toLowerCase(), word.toLowerCase());
 /*
-distance (kalayo sa pagka pares) sa term nga gisulod sa user ug sa term sa dictionary (data[i]) kay mas gamay o equal sa maxDistance. Ang pasabot sa“distance” kay nagpasabot kung unsa kapareho ang duha ka string. Gamay nga distance = halos pareho ang mga words. divino*/
-        if (distance <= maxDistance) {
+distance (kalayo sa pagka pares) sa term nga gisulod sa user ug sa term sa dictionary (data[i]) kay mas gamay o equal sa maxDistance.
+Ang pasabot sa“distance” kay nagpasabot kung unsa kapareho ang duha ka string. Gamay nga distance = halos pareho ang mga words. divino*/
+       
+     if (distance <= maxDistance) {
             System.out.println("- " + data[i]); 
             hasSuggestion = true;
         }
