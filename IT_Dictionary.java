@@ -77,7 +77,7 @@ data[34] = "Virtual Machine: A software-based simulation of a physical computer.
             System.out.println("==================================================");
             System.out.println("1. Search exact term");
             System.out.println("2. Show random term");
-            System.out.println("3. Feature name");
+            System.out.println("3. Show all Terms");//Albarico, Jason D.
             System.out.println("4. Feature name");
             System.out.println("5. Feature name");
             System.out.println("6. Feature name");
@@ -100,7 +100,7 @@ data[34] = "Virtual Machine: A software-based simulation of a physical computer.
                     showRandomTerm();
                     break;
                 case 3:
-                    //Feature();
+                   showAllTerms(); //Menu for List of Terms- Albarico, Jason D.
                     break;
                 case 4:
                     //Feature();
@@ -149,8 +149,14 @@ data[34] = "Virtual Machine: A software-based simulation of a physical computer.
         System.out.print("Search an IT term (or enter 1 to exit): ");
         String response = input.nextLine();
 
-        // delete spaces. 
-      cleanInput = response.trim();
+       //Enhanced Filtering for User Input - Albarico, Jason D.
+         cleanInput = response.trim();// delete spaces. 
+         if(cleanInput.isEmpty()){
+          System.out.println("ERROR: Please enter a word. Input Cannot be blank.");//Invalid Input
+        continue;
+         }//close if
+      
+   
 
         
         int resultIndex = BinarySearch(data, cleanInput);
@@ -169,7 +175,22 @@ data[34] = "Virtual Machine: A software-based simulation of a physical computer.
     }
     
  //------------------------------------------------------------------------------------------------------------  
-
+ //Method for Table of Contents-Albarico, Jason D.
+     static void showAllTerms(){
+        System.out.println("\n [ALL TERMS]");
+        
+        for(int i=0; i<data.length; i++){
+           
+            if (data[i] != null) {
+             //kuhaon ra ang word before ang COLON: | Mo gana ra ang split kug dili null and data[i]
+            String TermOnly = data[i].split(":")[0].trim();
+            System.out.println("=| " + TermOnly + " |=");
+            }//close if
+        }//close f-loop
+        System.out.println("------------");
+    }//close showAllTerms Method
+ 
+  //------------------------------------------------------------------------------------------------------------  
  static void showRandomTerm() {
        
         Random rand = new Random();
