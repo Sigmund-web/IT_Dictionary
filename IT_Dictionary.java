@@ -1,14 +1,21 @@
 
-
 import java.util.Scanner;
+
+/*this are all the data. And because we are creating a dictionary jargons for it it need to be a sequnece (a-z)
+so i used binary sarch - Sigmund Sayabo
+
+  */ 
 
 public class IT_Dictionary {
 
-//this are all the data
+// i put the array container here sa public class para ma call siya sa any method and use static. - Sigmund.
+    
     static String[] data = new String[15];
 
     public static void main(String[] args) {
 
+    // and mao ni ang data tanan.
+        
         data[0] = "API: Application Programming Interface; a set of rules for building software.";
         data[1] = "Bandwidth: The maximum amount of data that can be transmitted over a network.";
         data[2] = "Cloud Computing: Storing and accessing data and programs over the internet.";
@@ -31,11 +38,14 @@ public class IT_Dictionary {
         System.out.print("enter word: ");
         String response = input.nextLine();
 
-        // delete spaces.
+        // delete spaces. 
         String cleanInput = response.trim();
 
+        
         int resultIndex = BinarySearch(data, cleanInput);
 
+        // not equal sa -1 means wala sa array list and word na gi pangita sa user.
+        
         if (resultIndex != -1) {
             System.out.println("Result: " + data[resultIndex]);
         } else {
@@ -43,19 +53,29 @@ public class IT_Dictionary {
         }
 
     }
-
+//Sigmund Sayabo
+// methods sa logic BinarySearching 
+    
     public static int BinarySearch(String[] list, String target) {
 
+// so ang formula is if word is not equal sa middle then maybe naa sa lower group or higher group.
+        
         int low = 0;
-        int high = data.length - 1;
+        int high = data.length - 1; // last index
 
+        
         while (low <= high) {
+       
+            // mao ni ang middle = formula
             int mid = (low + high) / 2;
 
+            // spli (:) and added trim();
             String currentWord = list[mid].split(":")[0].trim();
-
+    
+        // .compare is gi compare niya ang curentWord then comparison iyang variable.        
             int comparison = target.compareToIgnoreCase(currentWord);
 
+    // so if and word is si middle then return mid if target is greater than low if target < compareson then high.
             if (comparison == 0) {
                 return mid;
             } else if (comparison > 0) {
