@@ -33,9 +33,11 @@ public class IT_Dictionary {
         data[14] = "Open Source: Software for which the original source code is made freely available and may be redistributed and modified.";
 
         Scanner input = new Scanner(System.in);
+     // gi dungagan nakog loop para di mag balik2 og run ang program after every search. - Benedict Guino-o.
+        while (true) {
 
         // enter user input
-        System.out.print("enter word: ");
+        System.out.print("Search an IT term (or enter 1 to exit): ");
         String response = input.nextLine();
 
         // delete spaces. 
@@ -48,11 +50,15 @@ public class IT_Dictionary {
         
         if (resultIndex != -1) {
             System.out.println("Result: " + data[resultIndex]);
+         
+        } else if (response.equals("1")) {
+            System.out.println("Exiting...");
+            break; // mao ning else if para ma exit ang program kung mag enter og 1 ang user. - Benedict Guino-o.
         } else {
             System.out.println("Word not found");
         }
 
-    }
+    }}
 //Sigmund Sayabo
 // methods sa logic BinarySearching 
     
