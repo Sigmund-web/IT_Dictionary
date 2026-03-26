@@ -47,16 +47,13 @@ public class IT_Dictionary {
         int resultIndex = BinarySearch(data, cleanInput);
 
         // not equal sa -1 means wala sa array list and word na gi pangita sa user.
-        
-        if (resultIndex != -1) {
-            System.out.println("Result: " + data[resultIndex]);
-         
-        } else if (response.equals("1")) {
-            System.out.println("Exiting...");
-            break; // mao ning else if para ma exit ang program kung mag enter og 1 ang user. - Benedict Guino-o.
-        } else {
-            System.out.println("Word not found");
-        }
+
+         //pag 1 ang gi enter sa user mu return ang displayResult method ug boolean na false
+         // i-check diri sa if condition kung false ang na return, 
+         //pag false, mu break ang loop - Rulona
+       if (!displayResult(resultIndex, response)){
+        break;
+       }
 
     }}
 //Sigmund Sayabo
@@ -95,5 +92,19 @@ public class IT_Dictionary {
         return -1;
 
     }
+
+ //gihimo an nako ug method ang pagdisplay sa result para limyo ang main - Rulona
+ //ang argument kay ang resultIndex gikan sa binary search ug response sa user
+ public static boolean displayResult(int resultIndex, String response) {
+    if (response.equals("1")) {
+        System.out.println("Exiting...");
+        return false;
+    } else if (resultIndex != -1) {
+        System.out.println("Result: " + data[resultIndex]);
+    } else {
+        System.out.println("Word not found");
+    }
+    return true;
+}
 
 }
