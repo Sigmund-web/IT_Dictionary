@@ -31,17 +31,29 @@ static String cleanInput ;// ge declare dri kay dli ma access sa displayResult n
         data[13] = "Node: A basic unit of a data structure, such as a linked list or tree data structure.";
         data[14] = "Open Source: Software for which the original source code is made freely available and may be redistributed and modified.";
 
+
+     
      //   Scanner input = new Scanner(System.in); need e gawas kay local lng sya need ma access sa gawas - Kenneth Bantayan
      // gi dungagan nakog loop para di mag balik2 og run ang program after every search. - Benedict Guino-o.
         while (true) {
 
         // enter user input
-        System.out.print("Search an IT term (or enter 1 to exit): ");
+        System.out.print("Search an IT term [ENTER 0 to view terms] | [ENTER 1 to exit]: ");
         String response = input.nextLine();
 
-        // delete spaces. 
-      cleanInput = response.trim();
+         //Enhanced Filtering for User Input - Albarico, Jason D.
+         cleanInput = response.trim();// delete spaces. 
+         if(cleanInput.isEmpty()){
+          System.out.println("ERROR: Please enter a word. Input Cannot be blank.");//Invalid Input
+        continue;
+         }//close if
+        //Menu for Listing of TERMS-Albarico, Jason D.
+         if(response.equals("0")){
+             showAllTerms();
+             continue;
+         }//close if
 
+ 
         
         int resultIndex = BinarySearch(data, cleanInput);
 
@@ -54,10 +66,22 @@ static String cleanInput ;// ge declare dri kay dli ma access sa displayResult n
         break;
        }
 
-    }}
+    }}//end MAIN METHOD
 //Sigmund Sayabo
 // methods sa logic BinarySearching 
-    
+
+ //Method for Listing of TERMS -Albarico, Jason D.
+    public static void showAllTerms(){
+        System.out.println("\n [ALL TERMS]");
+        
+        for(int i=0; i<data.length; i++){
+            //kuhaon ra ang word before ang COLON:  (Terms)
+            String TermOnly= data[i].split(":")[0].trim();
+            System.out.println("=|"+TermOnly+"|=");  
+        }//end f-loop
+     System.out.println("------------");
+    }//close showAllTerms Method
+ 
     public static int BinarySearch(String[] list, String target) {
 
 // so ang formula is if word is not equal sa middle then maybe naa sa lower group or higher group.
