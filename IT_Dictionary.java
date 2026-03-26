@@ -1,3 +1,4 @@
+import java.util.Random;
 import java.util.Scanner;
 
 /*this are all the data. And because we are creating a dictionary jargons for it it need to be a sequnece (a-z)
@@ -8,9 +9,10 @@ so i used binary sarch - Sigmund Sayabo
 public class IT_Dictionary {
 
 // i put the array container here sa public class para ma call siya sa any method and use static. - Sigmund.
-   static Scanner input = new Scanner(System.in); 
-    static String[] data = new String[15];
-static String cleanInput ;// ge declare dri kay dli ma access sa displayResult na method - Kenneth Bantayan
+    static Scanner input = new Scanner(System.in); 
+    static Random random = new Random();
+    static String[] data = new String[16];
+    static String cleanInput ;// ge declare dri kay dli ma access sa displayResult na method - Kenneth Bantayan
     public static void main(String[] args) {
 
     // and mao ni ang data tanan.
@@ -30,9 +32,83 @@ static String cleanInput ;// ge declare dri kay dli ma access sa displayResult n
         data[12] = "Metadata: A set of data that describes and gives information about other data.";
         data[13] = "Node: A basic unit of a data structure, such as a linked list or tree data structure.";
         data[14] = "Open Source: Software for which the original source code is made freely available and may be redistributed and modified.";
+        data[15] = "Open Source: Software for which the original source code is made freely available and may be redistributed and modified.";
 
-     //   Scanner input = new Scanner(System.in); need e gawas kay local lng sya need ma access sa gawas - Kenneth Bantayan
-     // gi dungagan nakog loop para di mag balik2 og run ang program after every search. - Benedict Guino-o.
+    
+
+    //Famoso
+    run();
+    }
+    
+    static void run() {
+        int choice;
+
+        do {
+            System.out.println("==================================================");
+            System.out.println("IT DICTIONARY");
+            System.out.println("==================================================");
+            System.out.println("1. Search exact term");
+            System.out.println("2. Show random term");
+            System.out.println("3. Feature name");
+            System.out.println("4. Feature name");
+            System.out.println("5. Feature name");
+            System.out.println("6. Feature name");
+            System.out.println("7. Feature name");
+            System.out.println("8. Feature name");
+            System.out.println("9. Feature name");
+            System.out.println("10.Feature name");
+            System.out.println("0. Exit");
+            System.out.println("==================================================");
+
+            choice = readInt("Enter your choice: ");
+            System.out.println();
+            // add diri ang name sa method 
+            switch (choice) {
+                case 1:
+                    searchExactTerm();
+                    break;
+                case 2:
+                    showRandomTerm();
+                    break;
+                case 3:
+                    //Feature();
+                    break;
+                case 4:
+                    //Feature();
+                    break;
+                case 5:
+                    //Feature();
+                    break;
+                case 6:
+                    //Feature();
+                    break;
+                case 7:
+                    //Feature();
+                    break;
+                case 8:
+                    //Feature();
+                    break;
+                case 9:
+                    //Feature();
+                    break;
+                case 10:
+                    //Feature();
+                    break;
+                case 0:
+                    System.out.println("Exiting dictionary. Goodbye!");
+                    break;
+                default:
+                    System.out.println("Invalid choice. Please try again.");
+            }
+
+            if (choice != 0) {
+                System.out.println();
+                pause();
+            }
+
+        } while (choice != 0);
+    }
+    static void searchExactTerm() {
         while (true) {
 
         // enter user input
@@ -53,14 +129,44 @@ static String cleanInput ;// ge declare dri kay dli ma access sa displayResult n
        if (!displayResult(resultIndex, response)){
         break;
        }
+    }
+    }
+    
+    static void showRandomTerm() {
+        Random rand = new Random();
+        int index = rand.nextInt(data.length);
+        System.out.println(data[index]);
+    }
+ 
+    static void pause() {
+        System.out.print("Press Enter to continue...");
+        input.nextLine();
+    }
+    static int readInt(String prompt) {
+        while (true) {
+            System.out.print(prompt);
+            String str = input.nextLine();
 
-    }}
+            try {
+                return Integer.parseInt(str);
+            } catch (NumberFormatException e) {
+                System.out.println("Please enter a valid number.");
+            }
+        }
+    }
+   
+
+
+   //   Scanner input = new Scanner(System.in); need e gawas kay local lng sya need ma access sa gawas - Kenneth Bantayan
+     // gi dungagan nakog loop para di mag balik2 og run ang program after every search. - Benedict Guino-o.      
+       
+
 //Sigmund Sayabo
-// methods sa logic BinarySearching 
+        // methods sa logic BinarySearching 
     
     public static int BinarySearch(String[] list, String target) {
 
-// so ang formula is if word is not equal sa middle then maybe naa sa lower group or higher group.
+    // so ang formula is if word is not equal sa middle then maybe naa sa lower group or higher group.
         
         int low = 0;
         int high = data.length - 1; // last index
@@ -113,8 +219,9 @@ static String cleanInput ;// ge declare dri kay dli ma access sa displayResult n
     }
     }
     return true;
-} 
-public static int levenshteinDistance(String a, String b) {
+    } 
+
+    public static int levenshteinDistance(String a, String b) {
     int[][] dp = new int[a.length() + 1][b.length() + 1];
 
     for (int i = 0; i <= a.length(); i++) dp[i][0] = i;
