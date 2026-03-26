@@ -1,4 +1,3 @@
-
 import java.util.Scanner;
 
 /*this are all the data. And because we are creating a dictionary jargons for it it need to be a sequnece (a-z)
@@ -9,9 +8,9 @@ so i used binary sarch - Sigmund Sayabo
 public class IT_Dictionary {
 
 // i put the array container here sa public class para ma call siya sa any method and use static. - Sigmund.
-    
+   static Scanner input = new Scanner(System.in); 
     static String[] data = new String[15];
-
+static String cleanInput ;// ge declare dri kay dli ma access sa displayResult na method - Kenneth Bantayan
     public static void main(String[] args) {
 
     // and mao ni ang data tanan.
@@ -32,7 +31,7 @@ public class IT_Dictionary {
         data[13] = "Node: A basic unit of a data structure, such as a linked list or tree data structure.";
         data[14] = "Open Source: Software for which the original source code is made freely available and may be redistributed and modified.";
 
-        Scanner input = new Scanner(System.in);
+     //   Scanner input = new Scanner(System.in); need e gawas kay local lng sya need ma access sa gawas - Kenneth Bantayan
      // gi dungagan nakog loop para di mag balik2 og run ang program after every search. - Benedict Guino-o.
         while (true) {
 
@@ -41,7 +40,7 @@ public class IT_Dictionary {
         String response = input.nextLine();
 
         // delete spaces. 
-        String cleanInput = response.trim();
+      cleanInput = response.trim();
 
         
         int resultIndex = BinarySearch(data, cleanInput);
@@ -101,10 +100,65 @@ public class IT_Dictionary {
         return false;
     } else if (resultIndex != -1) {
         System.out.println("Result: " + data[resultIndex]);
-    } else {
-        System.out.println("Word not found");
+    }/* else {
+         System.out.println("Word not found")} enchance para magamit ang suggestWords --Romnick Felix*/
+    else {// ge add na method to call the suggestWords method
+    System.out.println("Word not found");
+
+    System.out.print("Do you want suggestions? (yes/no): ");
+    String choice = input.nextLine();
+
+    if (choice.equalsIgnoreCase("yes")) {
+        suggestWords(cleanInput); //  METHOD CALL
+    }
     }
     return true;
-}
+} 
+public static int levenshteinDistance(String a, String b) {
+    int[][] dp = new int[a.length() + 1][b.length() + 1];
+
+    for (int i = 0; i <= a.length(); i++) dp[i][0] = i;
+    for (int j = 0; j <= b.length(); j++) dp[0][j] = j;
+
+    for (int i = 1; i <= a.length(); i++) {
+        for (int j = 1; j <= b.length(); j++) {
+
+            int cost = (a.charAt(i - 1) == b.charAt(j - 1)) ? 0 : 1;
+
+            int substitution = dp[i - 1][j - 1] + cost;
+            int insertion = dp[i][j - 1] + 1;
+            int deletion = dp[i - 1][j] + 1;
+
+            dp[i][j] = Math.min(substitution, Math.min(insertion, deletion));
+        }
+    }
+
+    return dp[a.length()][b.length()];
+ }
+ // method for suggest word if ever ma misspelled using levenshteinDistance alghorihm - Joseph Mark  divino
+ public static void suggestWords(String input) {
+
+    System.out.println("Suggestions:");
+
+    int maxDistance = 3;
+    boolean hasSuggestion = false;
+
+    for (int i = 0; i < data.length; i++) {
+
+        String word = data[i].split(":")[0].trim();
+
+        int distance = levenshteinDistance(input.toLowerCase(), word.toLowerCase());
+/*
+distance (kalayo sa pagka pares) sa term nga gisulod sa user ug sa term sa dictionary (data[i]) kay mas gamay o equal sa maxDistance. Ang pasabot sa“distance” kay nagpasabot kung unsa kapareho ang duha ka string. Gamay nga distance = halos pareho ang mga words. divino*/
+        if (distance <= maxDistance) {
+            System.out.println("- " + data[i]); 
+            hasSuggestion = true;
+        }
+    }
+
+    if (!hasSuggestion) {
+        System.out.println("No similar IT terms found.");
+    }
+ }
 
 }
