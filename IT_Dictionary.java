@@ -19,6 +19,11 @@ public class IT_Dictionary {
     
  static String cleanInput ; 
  // ge declare dri kay dli ma access sa displayResult na method - Kenneth Bantayan
+ // SEARCH HISTORY FEATURE - Biando, Marc Terence
+// array para mag store sa last 10 ka search sa user (recent searches)
+static String[] searchHistory = new String[10];
+// counter para ma track pila na ka search ang na store
+static int historyCount = 0;
  
  public static void main(String[] args) {
 
@@ -78,7 +83,7 @@ data[34] = "Virtual Machine: A software-based simulation of a physical computer.
             System.out.println("1. Search exact term");
             System.out.println("2. Show random term");
             System.out.println("3. Show all Terms");//Albarico, Jason D.
-            System.out.println("4. Feature name");
+            System.out.println("4. Search History");
             System.out.println("5. Feature name");
             System.out.println("6. Feature name");
             System.out.println("7. Feature name");
@@ -103,7 +108,7 @@ data[34] = "Virtual Machine: A software-based simulation of a physical computer.
                    showAllTerms(); //Menu for List of Terms- Albarico, Jason D.
                     break;
                 case 4:
-                    //Feature();
+                   showSearchHistory();//method call para ipakita ang search history - Biando, Marc Terence B.
                     break;
                 case 5:
                     //Feature();
@@ -151,6 +156,7 @@ data[34] = "Virtual Machine: A software-based simulation of a physical computer.
 
        //Enhanced Filtering for User Input - Albarico, Jason D.
          cleanInput = response.trim();// delete spaces. 
+         addToHistory(cleanInput);//tawagon ang method para i-save ang user input sa history - Biando, Marc Terence B.
          if(cleanInput.isEmpty()){
           System.out.println("ERROR: Please enter a word. Input Cannot be blank.");//Invalid Input
         continue;
@@ -189,13 +195,50 @@ data[34] = "Virtual Machine: A software-based simulation of a physical computer.
  static void showRandomTerm() {
        
         Random rand = new Random();
-        int index = rand.nextInt(data.length);
+        int index = rand.nextInt(data.length// method para i-save ang gi search sa user ngadto sa history - (Your Name)
         System.out.println(data[index]);
   
     }
+ 
 
  //------------------------------------------------------------------------------------------------------------  
-   
+ static void addToHistory(String term) {
+    if (term == null || term.trim().isEmpty()) return;
+/* kung puno na ang array (10 items), i-shift ang tanan pa left
+     para matanggal ang pinaka una (oldest search)
+     then ibutang ang new search sa last
+ */
+    if (historyCount == searchHistory.length) {
+        for (int i = 0; i < searchHistory.length - 1; i++) {
+            searchHistory[i] = searchHistory[i + 1];
+        }
+        searchHistory[searchHistory.length - 1] = term;
+    } else {
+        //kung dili pa puno, ibutang lang sa next available index 
+        searchHistory[historyCount++] = term;
+    }
+}
+
+ // method for search history sa user - Biando, Marc Terence B.
+ static void showSearchHistory() {
+    System.out.println("\n[RECENT SEARCHES]");
+    
+//check niya kung wala pay search na nahimo
+    if (historyCount == 0) {
+        System.out.println("No searches yet.");
+        return;
+    }   
+     //i-print gikan sa pinaka latest pa backward para ang pinaka recent nga search ang mauna makita
+    for (int i = historyCount - 1; i >= 0; i--) {
+        System.out.println("- " + searchHistory[i]);
+     }
+
+    System.out.println("----------------------");
+}
+
+ //------------------------------------------------------------------------------------------------------------
+ 
+
  static void pause() {
         System.out.print("Press Enter to continue...");
         input.nextLine();
