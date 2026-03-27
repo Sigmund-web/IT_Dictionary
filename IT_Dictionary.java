@@ -381,6 +381,14 @@ data[34] = "Virtual Machine: A software-based simulation of a physical computer.
     for (int i = 0; i < data.length; i++) {
 
         String word = data[i].split(":")[0].trim();
+     //if nag matched ang gi enter sa user mag show ang mga terms na naa sa dictionary bisag one letter lang -kelvin monsales
+//word.toLowerCase() i ignore niya bisag naka uppercase ang gi enter sa user or lowercase and i convert niya into lowercase ang gi enter sa user. - kelvin monsales
+//startsWith(input.toLowerCase()) meaning i check niya if ang gi enter niya na word the same sa gisearch nimi (sample: nag enter kag pro and ang first three letter na naa sa dictionary is available si programming, protocol,produce, i show ni niya tanan kay match man ang first three letter;) - kelvin monsales
+ //System.out.println("- " + word); if true siya meanig i show niya tanan terms na match sa gi input nimo - kelvin mosales
+if (word.toLowerCase().startsWith(input.toLowerCase())) {
+        System.out.println("- " + word);
+        hasSuggestion = true;
+    }
 
         int distance = levenshteinDistance(input.toLowerCase(), word.toLowerCase());
 /*
