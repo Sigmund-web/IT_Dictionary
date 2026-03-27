@@ -1,78 +1,76 @@
+package com.mycompany.itc102_sayabo;
+
 import java.util.Random;
 import java.util.Scanner;
 
 /*this are all the data. And because we are creating a dictionary jargons for IT it should be alphabetical (a-z)
 so i used binary sarch - Sigmund Sayabo.
 
-  */ 
-
+ */
 public class IT_Dictionary {
 
- static String[] data = new String[36];
+    static String[] data = new String[35];
 // I put the array container here sa public class para ma call siya sa any method and use static. - Sigmund Sayabo.
-   
-    static Scanner input = new Scanner(System.in); 
- //   Scanner input = new Scanner(System.in); need e gawas kay local lng sya need ma access sa gawas - Kenneth Bantayan  
 
- static Random random = new Random();
-    
-    
- static String cleanInput ; 
- // ge declare dri kay dli ma access sa displayResult na method - Kenneth Bantayan
- // SEARCH HISTORY FEATURE - Biando, Marc Terence
+    static Scanner input = new Scanner(System.in);
+    //   Scanner input = new Scanner(System.in); need e gawas kay local lng sya need ma access sa gawas - Kenneth Bantayan  
+
+    static Random random = new Random();
+
+    static String cleanInput;
+    // ge declare dri kay dli ma access sa displayResult na method - Kenneth Bantayan
+    // SEARCH HISTORY FEATURE - Biando, Marc Terence
 // array para mag store sa last 10 ka search sa user (recent searches)
-static String[] searchHistory = new String[10];
+    static String[] searchHistory = new String[10];
 // counter para ma track pila na ka search ang na store
-static int historyCount = 0;
- 
- public static void main(String[] args) {
+    static int historyCount = 0;
 
-    //  mao ni ang hard coded na data tanan.
-    // nag add kog 20 ka terms + gi arrange nanako alphabetically - Raven Ivan Cabingatan.
+    public static void main(String[] args) {
+
+        //  mao ni ang hard coded na data tanan.
+        // nag add kog 20 ka terms + gi arrange nanako alphabetically - Raven Ivan Cabingatan.
+        data[0] = "Algorithm: A step-by-step procedure used to solve a problem or perform a task.";
+        data[1] = "API: Application Programming Interface; a set of rules for building software.";
+        data[2] = "Backup: A copy of data stored separately to restore it in case of loss or damage.";
+        data[3] = "Bandwidth: The maximum amount of data that can be transmitted over a network.";
+        data[4] = "Cache: A temporary storage area that stores frequently accessed data for faster retrieval.";
+        data[5] = "Cloud Computing: Storing and accessing data and programs over the internet.";
+        data[6] = "Compiler: A program that converts source code into machine code.";
+        data[7] = "Database: An organized collection of structured information or data.";
+        data[8] = "Debugging: The process of identifying and removing errors from computer hardware or software.";
+        data[9] = "Domain: A unique name that identifies a website on the internet.";
+        data[10] = "Encryption: The process of converting information or data into a code to prevent unauthorized access.";
+        data[11] = "Ethernet: A technology used for connecting computers in a local area network (LAN).";
+        data[12] = "Firewall: A security system that monitors and controls incoming and outgoing network traffic.";
+        data[13] = "Framework: A pre-built set of tools and libraries used to develop software applications.";
+        data[14] = "Gateway: A network device that connects different networks and allows them to communicate.";
+        data[15] = "GUI: Graphical User Interface; a visual way of interacting with a computer using items such as windows and icons.";
+        data[16] = "Hashing: The process of converting data into a fixed-size value for security or indexing.";
+        data[17] = "HTTP: Hypertext Transfer Protocol; the foundation of data exchange on the World Wide Web.";
+        data[18] = "IDE: Integrated Development Environment; software used for writing and testing code.";
+        data[19] = "IP Address: A unique string of characters that identifies each computer using the Internet Protocol.";
+        data[20] = "JSON: JavaScript Object Notation; a lightweight data-interchange format.";
+        data[21] = "Kernel: The core part of an operating system that manages operations of the computer and hardware.";
+        data[22] = "Latency: The delay before a transfer of data begins following an instruction for its transfer.";
+        data[23] = "Loop: A programming structure that repeats a block of code multiple times.";
+        data[24] = "Malware: Malicious software designed to damage or disrupt systems.";
+        data[25] = "Metadata: A set of data that describes and gives information about other data.";
+        data[26] = "Node: A basic unit of a data structure, such as a linked list or tree data structure.";
+        data[27] = "Open Source: Software for which the original source code is made freely available and may be redistributed and modified.";
+        data[28] = "Operating System: Software that manages computer hardware and software resources.";
+        data[29] = "Protocol: A set of rules that govern data communication between devices.";
+        data[30] = "Query: A request for data or information from a database.";
+        data[31] = "Router: A device that forwards data packets between computer networks.";
+        data[32] = "Syntax: The set of rules that defines the structure of code in a programming language.";
+        data[33] = "Thread: The smallest unit of processing that can be executed by a CPU.";
+        data[34] = "Virtual Machine: A software-based simulation of a physical computer.";
+
         
-       data[0] = "Algorithm: A step-by-step procedure used to solve a problem or perform a task.";
-data[1] = "API: Application Programming Interface; a set of rules for building software.";
-data[2] = "Backup: A copy of data stored separately to restore it in case of loss or damage.";
-data[3] = "Bandwidth: The maximum amount of data that can be transmitted over a network.";
-data[4] = "Cache: A temporary storage area that stores frequently accessed data for faster retrieval.";
-data[5] = "Cloud Computing: Storing and accessing data and programs over the internet.";
-data[6] = "Compiler: A program that converts source code into machine code.";
-data[7] = "Database: An organized collection of structured information or data.";
-data[8] = "Debugging: The process of identifying and removing errors from computer hardware or software.";
-data[9] = "Domain: A unique name that identifies a website on the internet.";
-data[10] = "Encryption: The process of converting information or data into a code to prevent unauthorized access.";
-data[11] = "Ethernet: A technology used for connecting computers in a local area network (LAN).";
-data[12] = "Firewall: A security system that monitors and controls incoming and outgoing network traffic.";
-data[13] = "Framework: A pre-built set of tools and libraries used to develop software applications.";
-data[14] = "Gateway: A network device that connects different networks and allows them to communicate.";
-data[15] = "GUI: Graphical User Interface; a visual way of interacting with a computer using items such as windows and icons.";
-data[16] = "Hashing: The process of converting data into a fixed-size value for security or indexing.";
-data[17] = "HTTP: Hypertext Transfer Protocol; the foundation of data exchange on the World Wide Web.";
-data[18] = "IDE: Integrated Development Environment; software used for writing and testing code.";
-data[19] = "IP Address: A unique string of characters that identifies each computer using the Internet Protocol.";
-data[20] = "JSON: JavaScript Object Notation; a lightweight data-interchange format.";
-data[21] = "Kernel: The core part of an operating system that manages operations of the computer and hardware.";
-data[22] = "Latency: The delay before a transfer of data begins following an instruction for its transfer.";
-data[23] = "Loop: A programming structure that repeats a block of code multiple times.";
-data[24] = "Malware: Malicious software designed to damage or disrupt systems.";
-data[25] = "Metadata: A set of data that describes and gives information about other data.";
-data[26] = "Node: A basic unit of a data structure, such as a linked list or tree data structure.";
-data[27] = "Open Source: Software for which the original source code is made freely available and may be redistributed and modified.";
-data[28] = "Operating System: Software that manages computer hardware and software resources.";
-data[29] = "Protocol: A set of rules that govern data communication between devices.";
-data[30] = "Query: A request for data or information from a database.";
-data[31] = "Router: A device that forwards data packets between computer networks.";
-data[32] = "Syntax: The set of rules that defines the structure of code in a programming language.";
-data[33] = "Thread: The smallest unit of processing that can be executed by a CPU.";
-data[34] = "Virtual Machine: A software-based simulation of a physical computer.";
-        
 
-    
-
-    //Gilmer Famoso
-    run();
+        //Gilmer Famoso
+        run();
     }
-    
+
     static void run() {
         int choice;
 
@@ -95,8 +93,8 @@ data[34] = "Virtual Machine: A software-based simulation of a physical computer.
 
             choice = readInt("Enter your choice: ");
             System.out.println();
-          
-         // add diri ang name sa method 
+
+            // add diri ang name sa method 
             switch (choice) {
                 case 1:
                     searchExactTerm();
@@ -105,10 +103,10 @@ data[34] = "Virtual Machine: A software-based simulation of a physical computer.
                     showRandomTerm();
                     break;
                 case 3:
-                   showAllTerms(); //Menu for List of Terms- Albarico, Jason D.
+                    showAllTerms(); //Menu for List of Terms- Albarico, Jason D.
                     break;
                 case 4:
-                   showSearchHistory();//method call para ipakita ang search history - Biando, Marc Terence B.
+                    showSearchHistory();//method call para ipakita ang search history - Biando, Marc Terence B.
                     break;
                 case 5:
                     //Feature();
@@ -137,112 +135,106 @@ data[34] = "Virtual Machine: A software-based simulation of a physical computer.
 
             if (choice != 0) {
                 System.out.println();
-                pause(); 
+                pause();
             }
 
         } while (choice != 0);
     }
-   
- //------------------------------------------------------------------------------------------------------
- 
- static void searchExactTerm() {
-     
-  while (true) {
- // gi dungagan nakog loop para di mag balik2 og run ang program after every search. - Benedict Guino-o.   
-      
-   // enter user input
-        System.out.print("Search an IT term (or enter 1 to exit): ");
-        String response = input.nextLine();
 
-       //Enhanced Filtering for User Input - Albarico, Jason D.
-         cleanInput = response.trim();// delete spaces. 
-         addToHistory(cleanInput);//tawagon ang method para i-save ang user input sa history - Biando, Marc Terence B.
-         if(cleanInput.isEmpty()){
-          System.out.println("ERROR: Please enter a word. Input Cannot be blank.");//Invalid Input
-        continue;
-         }//close if
-      
-   
+    //------------------------------------------------------------------------------------------------------
+    static void searchExactTerm() {
 
-        
-        int resultIndex = BinarySearch(data, cleanInput);
+        while (true) {
+            // gi dungagan nakog loop para di mag balik2 og run ang program after every search. - Benedict Guino-o.   
 
-        
-      
-   if (!displayResult(resultIndex, response)){
-        break;
-       }
+            // enter user input
+            System.out.print("Search an IT term (or enter 1 to exit): ");
+            String response = input.nextLine();
+
+            //Enhanced Filtering for User Input - Albarico, Jason D.
+            cleanInput = response.trim();// delete spaces. 
+            addToHistory(cleanInput);//tawagon ang method para i-save ang user input sa history - Biando, Marc Terence B.
+            if (cleanInput.isEmpty()) {
+                System.out.println("ERROR: Please enter a word. Input Cannot be blank.");//Invalid Input
+                continue;
+            }//close if
+
+            int resultIndex = BinarySearch(data, cleanInput);
+
+            if (!displayResult(resultIndex, response)) {
+                break;
+            }
+        }
     }
-    }
-    
- //------------------------------------------------------------------------------------------------------------  
- //Method for Table of Contents-Albarico, Jason D.
-     static void showAllTerms(){
+
+    //------------------------------------------------------------------------------------------------------------  
+    //Method for Table of Contents-Albarico, Jason D.
+    static void showAllTerms() {
         System.out.println("\n [ALL TERMS]");
-        
-        for(int i=0; i<data.length; i++){
-           
+
+        for (int i = 0; i < data.length; i++) {
+
             if (data[i] != null) {
-             //kuhaon ra ang word before ang COLON: | Mo gana ra ang split kug dili null and data[i]
-            String TermOnly = data[i].split(":")[0].trim();
-            System.out.println("=| " + TermOnly + " |=");
+                //kuhaon ra ang word before ang COLON: | Mo gana ra ang split kug dili null and data[i]
+                String TermOnly = data[i].split(":")[0].trim();
+                System.out.println("=| " + TermOnly + " |=");
             }//close if
         }//close f-loop
         System.out.println("------------");
     }//close showAllTerms Method
- 
-  //------------------------------------------------------------------------------------------------------------  
- static void showRandomTerm() {
-       
-        Random rand = new Random();
-        int index = rand.nextInt(data.length// method para i-save ang gi search sa user ngadto sa history - (Your Name)
-        System.out.println(data[index]);
-  
-    }
- 
 
- //------------------------------------------------------------------------------------------------------------  
- static void addToHistory(String term) {
-    if (term == null || term.trim().isEmpty()) return;
-/* kung puno na ang array (10 items), i-shift ang tanan pa left
+    //------------------------------------------------------------------------------------------------------------  
+    static void showRandomTerm() {
+
+        Random rand = new Random();
+        int index = rand.nextInt(data.length);// method para i-save ang gi search sa user ngadto sa history - (Your Name)
+        System.out.println(data[index]);
+
+    }
+
+    //------------------------------------------------------------------------------------------------------------  
+    static void addToHistory(String term) {
+        if (term == null || term.trim().isEmpty()) {
+            return;
+        }
+        /* kung puno na ang array (10 items), i-shift ang tanan pa left
      para matanggal ang pinaka una (oldest search)
      then ibutang ang new search sa last
- */
-    if (historyCount == searchHistory.length) {
-        for (int i = 0; i < searchHistory.length - 1; i++) {
-            searchHistory[i] = searchHistory[i + 1];
+         */
+        if (historyCount == searchHistory.length) {
+            for (int i = 0; i < searchHistory.length - 1; i++) {
+                searchHistory[i] = searchHistory[i + 1];
+            }
+            searchHistory[searchHistory.length - 1] = term;
+        } else {
+            //kung dili pa puno, ibutang lang sa next available index 
+            searchHistory[historyCount++] = term;
         }
-        searchHistory[searchHistory.length - 1] = term;
-    } else {
-        //kung dili pa puno, ibutang lang sa next available index 
-        searchHistory[historyCount++] = term;
     }
-}
 
- // method for search history sa user - Biando, Marc Terence B.
- static void showSearchHistory() {
-    System.out.println("\n[RECENT SEARCHES]");
-    
+    // method for search history sa user - Biando, Marc Terence B.
+    static void showSearchHistory() {
+        System.out.println("\n[RECENT SEARCHES]");
+
 //check niya kung wala pay search na nahimo
-    if (historyCount == 0) {
-        System.out.println("No searches yet.");
-        return;
-    }   
-     //i-print gikan sa pinaka latest pa backward para ang pinaka recent nga search ang mauna makita
-    for (int i = historyCount - 1; i >= 0; i--) {
-        System.out.println("- " + searchHistory[i]);
-     }
+        if (historyCount == 0) {
+            System.out.println("No searches yet.");
+            return;
+        }
+        //i-print gikan sa pinaka latest pa backward para ang pinaka recent nga search ang mauna makita
+        for (int i = historyCount - 1; i >= 0; i--) {
+            System.out.println("- " + searchHistory[i]);
+        }
 
-    System.out.println("----------------------");
-}
+        System.out.println("----------------------");
+    }
 
- //------------------------------------------------------------------------------------------------------------
- 
-
- static void pause() {
+    //------------------------------------------------------------------------------------------------------------
+    static void pause() {
         System.out.print("Press Enter to continue...");
         input.nextLine();
     }
+
     static int readInt(String prompt) {
         while (true) {
             System.out.print(prompt);
@@ -255,36 +247,28 @@ data[34] = "Virtual Machine: A software-based simulation of a physical computer.
             }
         }
     }
-   
 
 //------------------------------------------------------------------------------------------------------------------------------
-   
- 
-
     public static int BinarySearch(String[] list, String target) {
 
- /*Sigmund Sayabo
+        /*Sigmund Sayabo
    methods sa logic BinarySearching */
-    
-     
-    // so ang formula is if word is not equal sa middle then maybe naa sa lower group or higher group.
-        
+        // so ang formula is if word is not equal sa middle then maybe naa sa lower group or higher group.
         int low = 0;
         int high = data.length - 1;  // last index
 
-        
         while (low <= high) {
-       
+
             // mao ni ang middle = formula
             int mid = (low + high) / 2;
 
             // spli (:) and added trim();
             String currentWord = list[mid].split(":")[0].trim();
-    
-        // .compare is gi compare niya ang curentWord then comparison iyang variable.        
+
+            // .compare is gi compare niya ang curentWord then comparison iyang variable.        
             int comparison = target.compareToIgnoreCase(currentWord);
 
-    // so if and word is si middle then return mid if target is greater than low if target < compareson then high.
+            // so if and word is si middle then return mid if target is greater than low if target < compareson then high.
             if (comparison == 0) {
                 return mid;
             } else if (comparison > 0) {
@@ -299,111 +283,107 @@ data[34] = "Virtual Machine: A software-based simulation of a physical computer.
 
     }
 
+    public static boolean displayResult(int resultIndex, String response) {
 
+        /*gihimo an nako ug method ang pag display sa result para limyo ang main - Rulona
+ ang argument kay ang resultIndex gikan sa binary search ug response sa user */
 
- public static boolean displayResult(int resultIndex, String response) {
- 
- /*gihimo an nako ug method ang pag display sa result para limyo ang main - Rulona
- ang argument kay ang resultIndex gikan sa binary search ug response sa user */ 
-
-  /* not equal sa -1 means wala sa array list and word na gi pangita sa user.
+ /* not equal sa -1 means wala sa array list and word na gi pangita sa user.
           pag 1 ang gi enter sa user mu return ang displayResult method ug boolean na false
           i-check diri sa if condition kung false ang na return, 
          pag false, mu break ang loop - Rulona
          
          */
-  
- 
-  if (response.equals("1")) {
-        System.out.println("Exiting...");
-        return false;
-    } else if (resultIndex != -1) {
-        System.out.println("Result: " + data[resultIndex]);
-    }
-   
-   
-   
-   
-   /* else {
-         System.out.println("Word not found")} enchance para magamit ang suggestWords --Romnick Felix*/
-    else {// ge add na method to call the suggestWords method
-    System.out.println("Word not found");
+        if (response.equals("1")) {
+            System.out.println("Exiting...");
+            return false;
+        } else if (resultIndex != -1) {
+            System.out.println("Result: " + data[resultIndex]);
+        } /* else {
+         System.out.println("Word not found")} enchance para magamit ang suggestWords --Romnick Felix*/ else {// ge add na method to call the suggestWords method
+            System.out.println("Word not found");
 
-    System.out.print("Do you want suggestions? (yes/no): ");
-    String choice = input.nextLine();
+            System.out.print("Do you want suggestions? (yes/no): ");
+            String choice = input.nextLine();
 
-    if (choice.equalsIgnoreCase("yes")) {
-        suggestWords(cleanInput); //  METHOD CALL
-    }
-    }
-    return true;
-    } 
-
-  //-----------------------------------------------------------------------------------------------------------------
-   // method sa levenshtein distance - Jeskyle Ranises
- public static int levenshteinDistance(String a, String b) {
-    // himog 2D array table para ma store ang distance sa substrings
-    // rows a+1, coloumns b+1
-    int[][] dp = new int[a.length() + 1][b.length() + 1];
-
-    for (int i = 0; i <= a.length(); i++) dp[i][0] = i;
-    for (int j = 0; j <= b.length(); j++) dp[0][j] = j;
-// compare each character: loop through string a (row i) and string b (column j)
-    for (int i = 1; i <= a.length(); i++) {
-        for (int j = 1; j <= b.length(); j++) {
-// i check kung parehas ang letter, kung same then 0 pero kung lahi then 1 
-            int cost = (a.charAt(i - 1) == b.charAt(j - 1)) ? 0 : 1;
-// (replace) change one letter to another
-            int substitution = dp[i - 1][j - 1] + cost;
-          // (insert) add a new letter
-            int insertion = dp[i][j - 1] + 1;
-          // mag remove og letter
-            int deletion = dp[i - 1][j] + 1;
-
-            dp[i][j] = Math.min(substitution, Math.min(insertion, deletion));
+            if (choice.equalsIgnoreCase("yes")) {
+                suggestWords(cleanInput); //  METHOD CALL
+            }
         }
+        return true;
     }
 
-    return dp[a.length()][b.length()];
- }
+    //-----------------------------------------------------------------------------------------------------------------
+    // method sa levenshtein distance - Jeskyle Ranises
+    public static int levenshteinDistance(String a, String b) {
+        // himog 2D array table para ma store ang distance sa substrings
+        // rows a+1, coloumns b+1
+        int[][] dp = new int[a.length() + 1][b.length() + 1];
 
- //---------------------------------------------------------------------------------------------------------------------------
- 
+        for (int i = 0; i <= a.length(); i++) {
+            dp[i][0] = i;
+        }
+        for (int j = 0; j <= b.length(); j++) {
+            dp[0][j] = j;
+        }
+// compare each character: loop through string a (row i) and string b (column j)
+        for (int i = 1; i <= a.length(); i++) {
+            for (int j = 1; j <= b.length(); j++) {
+// i check kung parehas ang letter, kung same then 0 pero kung lahi then 1 
+                int cost = (a.charAt(i - 1) == b.charAt(j - 1)) ? 0 : 1;
+// (replace) change one letter to another
+                int substitution = dp[i - 1][j - 1] + cost;
+                // (insert) add a new letter
+                int insertion = dp[i][j - 1] + 1;
+                // mag remove og letter
+                int deletion = dp[i - 1][j] + 1;
 
- public static void suggestWords(String input) {
- // method for suggest word if ever ma misspelled using levenshteinDistance alghorihm - Joseph Mark  divino
-   
-  System.out.println("Suggestions:");
+                dp[i][j] = Math.min(substitution, Math.min(insertion, deletion));
+            }
+        }
 
-    int maxDistance = 3;
-    boolean hasSuggestion = false;
+        return dp[a.length()][b.length()];
+    }
 
-    for (int i = 0; i < data.length; i++) {
+    //---------------------------------------------------------------------------------------------------------------------------
+    public static void suggestWords(String input) {
+        // method for suggest word if ever ma misspelled using levenshteinDistance alghorihm - Joseph Mark  divino
 
-        String word = data[i].split(":")[0].trim();
-     //if nag matched ang gi enter sa user mag show ang mga terms na naa sa dictionary bisag one letter lang -kelvin monsales
+        System.out.println("Suggestions:");
+
+        int maxDistance = 3;
+        boolean hasSuggestion = false;
+
+        for (int i = 0; i < data.length; i++) {
+
+            String word = data[i].split(":")[0].trim();
+            //if nag matched ang gi enter sa user mag show ang mga terms na naa sa dictionary bisag one letter lang -kelvin monsales
 //word.toLowerCase() i ignore niya bisag naka uppercase ang gi enter sa user or lowercase and i convert niya into lowercase ang gi enter sa user. - kelvin monsales
 //startsWith(input.toLowerCase()) meaning i check niya if ang gi enter niya na word the same sa gisearch nimi (sample: nag enter kag pro and ang first three letter na naa sa dictionary is available si programming, protocol,produce, i show ni niya tanan kay match man ang first three letter;) - kelvin monsales
- //System.out.println("- " + word); if true siya meanig i show niya tanan terms na match sa gi input nimo - kelvin mosales
-if (word.toLowerCase().startsWith(input.toLowerCase())) {
-        System.out.println("- " + word);
-        hasSuggestion = true;
-    }
+            //System.out.println("- " + word); if true siya meanig i show niya tanan terms na match sa gi input nimo - kelvin mosales
+            if (word.toLowerCase().startsWith(input.toLowerCase())) {
+                System.out.println("- " + word);
+                hasSuggestion = true;
+            }
 
-        int distance = levenshteinDistance(input.toLowerCase(), word.toLowerCase());
-/*
+            int distance = levenshteinDistance(input.toLowerCase(), word.toLowerCase());
+            /*
 distance (kalayo sa pagka pares) sa term nga gisulod sa user ug sa term sa dictionary (data[i]) kay mas gamay o equal sa maxDistance.
 Ang pasabot sa“distance” kay nagpasabot kung unsa kapareho ang duha ka string. Gamay nga distance = halos pareho ang mga words. divino*/
-       
-     if (distance <= maxDistance) {
-            System.out.println("- " + data[i]); 
-            hasSuggestion = true;
+
+            if (distance <= maxDistance) {
+                System.out.println("- " + data[i]);
+                hasSuggestion = true;
+            }
+        }
+
+        if (!hasSuggestion) {
+            System.out.println("No similar IT terms found.");
+            
+            
         }
     }
 
-    if (!hasSuggestion) {
-        System.out.println("No similar IT terms found.");
-    }
- }
+   
 
 }
