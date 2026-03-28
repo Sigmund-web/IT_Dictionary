@@ -744,15 +744,17 @@ public class IT_Dictionary {
         } else if (resultIndex != -1) {
             System.out.println("Result: " + data[resultIndex]);
         } /* else {
-         System.out.println("Word not found")} enchance para magamit ang suggestWords --Romnick Felix*/ else {// ge add na method to call the suggestWords method
+         System.out.println("Word not found")} enchance para magamit ang suggestWords --Romnick Felix*/ 
+        else {// ge add na method to call the suggestWords method
             System.out.println("Word not found");
+            suggestWords(cleanInput); //  METHOD CALL
 
-            System.out.print("Do you want suggestions? (yes/no): ");
+       /*     System.out.print("Do you want suggestions? (yes/no): ");
             String choice = input.nextLine();
 
             if (choice.equalsIgnoreCase("yes")) {
                 suggestWords(cleanInput); //  METHOD CALL
-            }
+            }*/
         }
         return true;
     }
@@ -797,9 +799,9 @@ public class IT_Dictionary {
 
     int maxDistance = 3;
     boolean hasSuggestion = false;
-    boolean hasStartsWith = false; // ✅ ADDED: to detect if naa bay startsWith results
+    boolean hasStartsWith = false; // ADDED: to detect if naa bay startsWith results
 
-    Scanner sc = new Scanner(System.in); // ✅ ADDED: for yes/no interaction
+    Scanner sc = new Scanner(System.in); //  ADDED: for yes/no interaction
 
     // 🔹 FIRST LOOP: show startsWith suggestions (single letter / partial match)
     for (int i = 0; i < data.length; i++) {
@@ -813,11 +815,11 @@ public class IT_Dictionary {
         if (word.toLowerCase().startsWith(input.toLowerCase())) {
             System.out.println("- " + word);
             hasSuggestion = true;
-            hasStartsWith = true; // ✅ ADDED: mark nga naa tay prefix matches
+            hasStartsWith = true; //  ADDED: mark nga naa tay prefix matches
         }
     }
 
-    // ✅ ADDED: if naa na startsWith results, dili na mu proceed sa levenshtein (no question)
+    //  ADDED: if naa na startsWith results, dili na mu proceed sa levenshtein (no question)
     if (hasStartsWith) {
         return;
     }
@@ -840,10 +842,10 @@ Ang pasabot sa“distance” kay nagpasabot kung unsa kapareho ang duha ka strin
             if (answer.equalsIgnoreCase("yes")) {
                 System.out.println(data[i]); // show full meaning
                 hasSuggestion = true;
-                break; // ✅ ADDED: stop after correct word is confirmed
+                break; //  ADDED: stop after correct word is confirmed
             }
 
-            // ❌ OLD CODE (kept as comment for reference)
+            //  OLD CODE (kept as comment for reference)
             // System.out.println("- " + data[i]);
             // hasSuggestion = true;
         }
