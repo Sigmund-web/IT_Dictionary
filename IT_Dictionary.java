@@ -295,7 +295,7 @@ public class IT_Dictionary {
         static void showRandomTerm() {
 
         Random rand = new Random();
-        int index = rand.nextInt(data.length);// method para i-save ang gi search sa user ngadto sa history - (Your Name)
+        int index = rand.nextInt(data.length);
         System.out.println(data[index]);
 
     }
