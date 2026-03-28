@@ -1,3 +1,6 @@
+package Practice_Area;
+// sa netbeans ng package ah dili ma confuse
+
 import java.util.Random;
 import java.util.Scanner;
 
@@ -7,7 +10,7 @@ so i used binary sarch - Sigmund Sayabo.
  */
 public class IT_Dictionary {
 
-    static String[] data = new String[434];
+    static String[] data = new String[500];
 // I put the array container here sa public class para ma call siya sa any method and use static. - Sigmund Sayabo.
 
     static Scanner input = new Scanner(System.in);
@@ -41,7 +44,7 @@ public class IT_Dictionary {
         data[8] = "Algorithm: A step-by-step procedure used to solve a problem or perform a task.";
         data[9] = "Alias: A short, easy to remember name created for use in place of a longer, more complicated name; commonly used in e-mail applications. Also referred to as a 'nickname'.";
         data[10] = "Anonymous FTP: Archive sites where Internet users can log in and download files and programs without a special username or password. Typically, you enter anonymous as a username and your e-mail address as a password.";
-        data[11] = "Anti-Spam: To prevent e-mail spam, both end users and administrators of e-mail systems use various anti-spam techniques. Some of these techniques have been embedded in products, services and software to ease the burden on users and administrators. No one technique is a complete solution to the spam problem, and each has trade-offs between incorrectly rejecting legitimate e-mail vs. not rejecting all spam, and the associated costs in time and effort. Dataprise Cloud-Based Anti-SPAM e-mail service eliminates the problem almost entirely. Our state-of-the-art solution lets users see only the e-mail they want — and filters out all of the viruses and e-solicitations they don’t want before they reach user’s computers and mobile devices.";
+        data[11] = "Anti-Spam: To prevent e-mail spam, both end users and administrators of e-mail systems use various anti-spam techniques. Some of these techniques have been embedded in products, services and software to ease the burden on users and administrators. No one technique is a complete solution to the spam problem, and each has trade-offs between incorrectly rejecting legitimate e-mail vs. not rejecting all spam, and the associated costs in time and effort. Dataprise Cloud-Based Anti-SPAM e-mail service eliminates the problem almost entirely. Our state-of-the-art solution lets users see only the e-mail they want ? and filters out all of the viruses and e-solicitations they don\"t want before they reach user?s computers and mobile devices.";
         data[12] = "Antivirus: Software that is used for scanning and removing viruses from a computer or network. Its purpose is to protect servers and computers and to quarantine and remove any viruses found.";
         data[13] = "API: Application Programming Interface; a set of rules for building software.";
         data[14] = "Applets: A small application that performs a specific task and is run within another application. An example is a Java program that runs within a web browser.";
@@ -470,8 +473,9 @@ public class IT_Dictionary {
 
         //kani para sa word of the day feature by mendez pee jay..
         // gi generate ang word of the day once sa first run, random index gikan sa data array
+       
         int wordOfTheDayIndex = random.nextInt(data.length);
-        wordOfTheDay = data[wordOfTheDayIndex];
+        wordOfTheDay = data[wordOfTheDayIndex ];
         
         //Gilmer Famoso
         run();
@@ -482,25 +486,19 @@ public class IT_Dictionary {
 
         do {
             System.out.println("==================================================");
-            System.out.println("IT DICTIONARY");
+            System.out.println("              ---IT DICTIONARY---");
             System.out.println("==================================================");
 
             //kani para sa word of the day feature by mendez pee jay..
             // gi display ang word of the day sa banner area sa taas, before ang menus
             System.out.println("[ * WORD OF THE DAY * ]");
-            System.out.println("  " + wordOfTheDay);
+            System.out.println("  " + wordOfTheDay );
             System.out.println("==================================================");
  
             System.out.println("1. Search exact term");
             System.out.println("2. Show random term");
             System.out.println("3. Show all Terms");//Albarico, Jason D.
             System.out.println("4. Search History");
-            System.out.println("5. Feature name");
-            System.out.println("6. Feature name");
-            System.out.println("7. Feature name");
-            System.out.println("8. Feature name");
-            System.out.println("9. Feature name");
-            System.out.println("10.Feature name");
             System.out.println("0. Exit");
             System.out.println("==================================================");
 
