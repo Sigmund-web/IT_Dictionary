@@ -22,7 +22,8 @@ public class IT_Dictionary {
     static String[] searchHistory = new String[10];
 // counter para ma track pila na ka search ang na store
     static int historyCount = 0;
-
+    //kani para sa word of the day feature by mendez pee jay..
+    static String wordOfTheDay = "";
     public static void main(String[] args) {
 
         //  mao ni ang hard coded na data tanan.
@@ -467,6 +468,11 @@ public class IT_Dictionary {
         data[435] = "Zoom: The act of enlarging a portion of an onscreen image for fine detail work; most graphics programs have this capability.";
         data[436] = "ZTNA: Zero Trust Network Access or ZTNA is a security framework that requires all users - in or outside the organization’s network - to be authenticated, authorized, and continuously validated for security configuration and posture before being granted or keeping access to data and applications.";
 
+        //kani para sa word of the day feature by mendez pee jay..
+        // gi generate ang word of the day once sa first run, random index gikan sa data array
+        int wordOfTheDayIndex = random.nextInt(data.length);
+        wordOfTheDay = data[wordOfTheDayIndex];
+        
         //Gilmer Famoso
         run();
     }
@@ -478,6 +484,13 @@ public class IT_Dictionary {
             System.out.println("==================================================");
             System.out.println("IT DICTIONARY");
             System.out.println("==================================================");
+
+            //kani para sa word of the day feature by mendez pee jay..
+            // gi display ang word of the day sa banner area sa taas, before ang menus
+            System.out.println("[ * WORD OF THE DAY * ]");
+            System.out.println("  " + wordOfTheDay);
+            System.out.println("==================================================");
+ 
             System.out.println("1. Search exact term");
             System.out.println("2. Show random term");
             System.out.println("3. Show all Terms");//Albarico, Jason D.
