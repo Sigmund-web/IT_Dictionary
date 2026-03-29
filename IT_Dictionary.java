@@ -1,10 +1,8 @@
 package Dictionary;
 
-import java.util.Random;
-import java.util.Scanner;
-
+import java.util.*;
+ 
 public class IT_Dictionary {
-
     static Scanner input = new Scanner(System.in);
     static Random random = new Random();
     static String cleanInput;
@@ -38,6 +36,7 @@ public class IT_Dictionary {
             System.out.println("2. Show random term");
             System.out.println("3. Show all Terms");
             System.out.println("4. Search History");
+            System.out.println("5. Take Quiz");
             System.out.println("0. Exit");
             System.out.println("==================================================");
 
@@ -61,6 +60,10 @@ public class IT_Dictionary {
                     showSearchHistory();
                     clearConsole();
                     break;
+                case 5:
+                    takeQuiz();
+                    clearConsole();
+                    break;
                 case 0:
                     clearConsole();
                     System.out.println("Exiting dictionary. Goodbye!");
@@ -77,54 +80,28 @@ public class IT_Dictionary {
         System.out.flush();
     }
 
-    public static int BinarySearch(String[] list, String target) {
-        int low = 0;
-        int high = list.length - 1;
-
-        while (low <= high) {
-            int mid = (low + high) / 2;
-            if (list[mid] == null) { low++; continue; }
-            
-            String currentWord = list[mid].split(":")[0].trim();
-            int comparison = target.compareToIgnoreCase(currentWord);
-
-            if (comparison == 0) return mid;
-            else if (comparison > 0) low = mid + 1;
-            else high = mid - 1;
-        }
-        return -1;
-    }
-
-    public static boolean displayResult(int resultIndex, String response) {
-        if (response.equals("0")) {
-            System.out.println("Exiting...");
-            return false;
-        } else if (resultIndex != -1) {
-            System.out.println("Result: " + Data.data[resultIndex]);
-        } else {
-            System.out.println("Word not found");
-            suggestWords(cleanInput);
-        }
-        return true;
-    }
-
     static void searchExactTerm() {
         while (true) {
-            System.out.print("Search an IT term (Enter 0 to return): ");
+            System.out.print("Search an IT term (or enter 1 to exit): ");
             String response = input.nextLine();
             cleanInput = response.trim();
 
             if (cleanInput.isEmpty()) {
-                System.out.println("ERROR: Please enter a word. Input Cannot be blank.");
+                System.out.println("ERROR: Please enter a word. Input cannot be blank.");
                 continue;
             }
-
-            int resultIndex = BinarySearch(Data.data, cleanInput);
-            if (!displayResult(resultIndex, cleanInput)) {
-                return;
+            if (cleanInput.equals("1")) {
+                break;
             }
+
             addToHistory(cleanInput);
+            int resultIndex = BinarySearch(Data.data, cleanInput);
+
+            if (!displayResult(resultIndex, response)) {
+                break;
+            }
         }
+        pause();
     }
 
     static void showAllTerms() {
@@ -194,6 +171,37 @@ public class IT_Dictionary {
         }
     }
 
+    public static int BinarySearch(String[] list, String target) {
+        int low = 0;
+        int high = list.length - 1;
+
+        while (low <= high) {
+            int mid = (low + high) / 2;
+            if (list[mid] == null) { low++; continue; }
+            
+            String currentWord = list[mid].split(":")[0].trim();
+            int comparison = target.compareToIgnoreCase(currentWord);
+
+            if (comparison == 0) return mid;
+            else if (comparison > 0) low = mid + 1;
+            else high = mid - 1;
+        }
+        return -1;
+    }
+
+    public static boolean displayResult(int resultIndex, String response) {
+        if (response.equals("1")) {
+            System.out.println("Exiting...");
+            return false;
+        } else if (resultIndex != -1) {
+            System.out.println("Result: " + Data.data[resultIndex]);
+        } else {
+            System.out.println("Word not found");
+            suggestWords(cleanInput);
+        }
+        return true;
+    }
+
     public static int levenshteinDistance(String a, String b) {
         int[][] dp = new int[a.length() + 1][b.length() + 1];
         for (int i = 0; i <= a.length(); i++) dp[i][0] = i;
@@ -241,5 +249,57 @@ public class IT_Dictionary {
                 }
             }
         }
+    }
+
+    // ------------------ QUIZ FEATURE ------------------
+    static void takeQuiz() {
+        System.out.println("\n--- IT DICTIONARY QUIZ ---");
+
+        String[][] questions = {
+            {"What does CPU stand for?", "Central Processing Unit", "Computer Processing Unit", "Control Processing Unit", "Central Program Unit", "1"},
+            {"What is RAM?", "Random Access Memory", "Readily Available Memory", "Rapid Application Module", "Random Active Module", "1"},
+            {"What does DNS do?", "Translates domain names to IP addresses", "Manages database servers", "Encrypts network traffic", "Connects devices to Wi-Fi", "1"},
+            {"What is HTTPS?", "Secure protocol for websites", "High Transfer Protocol System", "Hyper Text Technical Script", "Hardware Transfer Protocol Secure", "1"},
+            {"What is a firewall?", "Protects network from unauthorized access", "Connects two networks", "Stores data temporarily", "A type of CPU", "1"}
+        };
+
+        List<Integer> indexes = new ArrayList<>();
+        for (int i = 0; i < questions.length; i++) indexes.add(i);
+        Collections.shuffle(indexes); // optional: shuffle question order
+
+        int score = 0;
+        for (int i = 0; i < 5; i++) { // ASK ALL 5 QUESTIONS
+            int idx = indexes.get(i);
+            System.out.println("\nQ" + (i + 1) + ": " + questions[idx][0]);
+            System.out.println("1. " + questions[idx][1]);
+            System.out.println("2. " + questions[idx][2]);
+            System.out.println("3. " + questions[idx][3]);
+            System.out.println("4. " + questions[idx][4]);
+
+            int correctOption = Integer.parseInt(questions[idx][5]); // convert correct answer to int
+
+            int userAnswer = 0;
+            while (true) {
+                System.out.print("Your answer (1-4): ");
+                String ans = input.nextLine();
+                try {
+                    userAnswer = Integer.parseInt(ans);
+                    if (userAnswer >= 1 && userAnswer <= 4) break;
+                    else System.out.println("Enter a number between 1 and 4.");
+                } catch (Exception e) {
+                    System.out.println("Invalid input. Enter a number 1-4.");
+                }
+            }
+
+            if (userAnswer == correctOption) {
+                System.out.println("Correct!");
+                score++;
+            } else {
+                System.out.println("Wrong! Correct answer: " + questions[idx][correctOption]);
+            }
+        }
+
+        System.out.println("\nYour total score: " + score + "/5");
+        pause();
     }
 }
