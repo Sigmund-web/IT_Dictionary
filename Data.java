@@ -1,6 +1,6 @@
 public class Data{
 
-    static String[] data = new String[500];
+    static String[] data = new String[437];
 // I put the array container here sa public class para ma call siya sa any method and use static. - Sigmund Sayabo.
 
 // gamit ug static na initializer block
