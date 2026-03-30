@@ -49,6 +49,7 @@ System.out.println("[ * WORD OF THE DAY * ]");
             System.out.println("2. Show random term");
             System.out.println("3. Show all Terms");
             System.out.println("4. Search History");
+			 System.out.println("5. take Quiz");
             System.out.println("0. Exit");
             System.out.println("==================================================");
 
@@ -71,10 +72,11 @@ System.out.println("[ * WORD OF THE DAY * ]");
                 case 4:
                     showSearchHistory();
                     clearConsole();
-                    Break;
-case 5:
-       takeQuiz();
-clearConsole();break;
+                    break;
+				case 5:
+       				takeQuiz();
+					clearConsole();
+					break;
 
                 case 0:
                     clearConsole();
@@ -285,4 +287,74 @@ clearConsole();break;
     }
 }
 
+
+    static void takeQuiz() { // SERVIDOR,ANDRE  nani tanan  
+        System.out.println("\n--- IT DICTIONARY QUIZ ---");
+
+        String[][] questions = {   //quiz og answer
+            {"What does CPU stand for?", "Central Processing Unit", "Computer Processing Unit", "Control Processing Unit", "Central Program Unit", "Central Processing Unit"},
+            {"What is RAM?", "Random Access Memory", "Readily Available Memory", "Rapid Application Module", "Random Active Module", "Random Access Memory"},
+            {"What does DNS do?", "Translates domain names to IP addresses", "Manages database servers", "Encrypts network traffic", "Connects devices to Wi-Fi", "Translates domain names to IP addresses"},
+            {"What is HTTPS?", "Secure protocol for websites", "High Transfer Protocol System", "Hyper Text Technical Script", "Hardware Transfer Protocol Secure", "Secure protocol for websites"},
+            {"What is a firewall?", "Protects network from unauthorized access", "Connects two networks", "Stores data temporarily", "A type of CPU", "Protects network from unauthorized access"}
+        };
+
+        // part nga i Shuffle ang question order
+        int[] questionOrder = new int[questions.length];
+        for (int i = 0; i < questionOrder.length; i++) questionOrder[i] = i;
+
+        for (int i = questionOrder.length - 1; i > 0; i--) {
+            int j = random.nextInt(i + 1);
+            int temp = questionOrder[i];
+            questionOrder[i] = questionOrder[j];
+            questionOrder[j] = temp;
+        }
+
+        int score = 0;
+
+        for (int i = 0; i < 5; i++) {
+            int idx = questionOrder[i];
+            System.out.println("\nQ" + (i + 1) + ": " + questions[idx][0]);
+
+            // Store answers in array
+            String[] answers = {questions[idx][1], questions[idx][2], questions[idx][3], questions[idx][4]};
+            String correctAnswer = questions[idx][5];
+
+            // mao nani nga ipang shuffles ang mga answer
+            for (int k = answers.length - 1; k > 0; k--) {
+                int j = random.nextInt(k + 1);
+                String tempAns = answers[k];
+                answers[k] = answers[j];
+                answers[j] = tempAns;
+            }
+
+            // mga naka Display nga mga  answers
+            for (int k = 0; k < answers.length; k++) {
+                System.out.println((k + 1) + ". " + answers[k]);
+            }
+
+            // kuhaon ang answer sa users 
+            System.out.print("Your answer (1-4): ");
+            String userInput = input.nextLine();
+            int chosenIndex;
+            try {
+                chosenIndex = Integer.parseInt(userInput) - 1;
+            } catch (Exception e) {
+                System.out.println("Invalid input! Counting as wrong.");
+                chosenIndex = -1;
+            }
+
+            // Check answer na 
+            if (chosenIndex >= 0 && answers[chosenIndex].equals(correctAnswer)) { //if tama then tama
+                System.out.println("Correct!");
+                score++;
+            } else { //if wrong ang answer matik mag hatag sya sa tama nga answer
+                System.out.println("Wrong! Correct answer: " + correctAnswer);
+            }
+        }
+
+        System.out.println("\nYour total score: " + score + "/5");// pilay score ihatag
+        pause();
+    }
+}
 
