@@ -1,36 +1,47 @@
-package Dictionary;
-
 import java.util.Random;
 import java.util.Scanner;
 
 public class IT_Dictionary {
-
+    // nag 
     static Scanner input = new Scanner(System.in);
     static Random random = new Random();
-    static String cleanInput;
-
+    static String cleanInput; // gi declare kay di ma access sa displayResult method - Kenneth D. Bantayan
+    // Scanner input = new scanner (System.in); - need himoong static para ma access sa uban method - Kenneth D. Bantayan
     // SEARCH HISTORY FEATURE
+//gamitan ug array para ma store ang recent searches sa user (max 10 entries) - Biando, Marc Terence B.
     static String[] searchHistory = new String[10];
+// counter para ma track pila na ka searches ang na store - Biando, Marc Terence B.
     static int historyCount = 0;
+    
+//kani para sa word of the day feature by mendez pee jay
     static String wordOfTheDay = "";
 
     public static void main(String[] args) {
         // Generate Word of the Day once at the start
         if (Data.data.length > 0) {
-            int wordOfTheDayIndex = random.nextInt(Data.data.length);
+           
+	//gi-generate  ang word of the day once sa first run, random index gikan sa data array //mendez pee jay
+ int wordOfTheDayIndex = random.nextInt(Data.data.length);
             wordOfTheDay = Data.data[wordOfTheDayIndex];
         }
         
         run();
     }
-
+// added while loop para di mag balik2 og run ang user sa program - Guino-o, Benedict E. (before ang menu gi add)
+// Menu and Choice Picker - Famoso, Gilmer C.
+// Modified by: ???
     static void run() {
         int choice;
         do {
             System.out.println("==================================================");
             System.out.println("            ---IT DICTIONARY---");
             System.out.println("==================================================");
-            System.out.println("[ * WORD OF THE DAY * ]");
+            
+
+
+	//kani para sa word of the day feature by mendez pee jay
+	//gi display ang word of the day before sa banner area sa taas, before ang menus
+System.out.println("[ * WORD OF THE DAY * ]");
             System.out.println("  " + wordOfTheDay);
             System.out.println("==================================================");
 
@@ -60,7 +71,11 @@ public class IT_Dictionary {
                 case 4:
                     showSearchHistory();
                     clearConsole();
-                    break;
+                    Break;
+case 5:
+       takeQuiz();
+clearConsole();break;
+
                 case 0:
                     clearConsole();
                     System.out.println("Exiting dictionary. Goodbye!");
@@ -72,18 +87,27 @@ public class IT_Dictionary {
         } while (choice != 0);
     }
 
+    // Cris Laurence Longino - para mo hinlo ang console every loop sa menu
     static void clearConsole() {
         System.out.print("\033[H\033[2J");
         System.out.flush();
     }
 
     public static int BinarySearch(String[] list, String target) {
+         //Sigmund Sayabo
+       /*
+       ang binary searching is pag search sa word alphabitically and na use ni siya sa 
+       sa search history na method. 
+       */
+        
         int low = 0;
         int high = list.length - 1;
 
         while (low <= high) {
             int mid = (low + high) / 2;
             if (list[mid] == null) { low++; continue; }
+            
+            // so if not in the middle maybe nasa lower or higher.
             
             String currentWord = list[mid].split(":")[0].trim();
             int comparison = target.compareToIgnoreCase(currentWord);
@@ -94,14 +118,17 @@ public class IT_Dictionary {
         }
         return -1;
     }
-
+    
+    //i accept ang result na index sa binary search ug response sa user
+    //if ang response kay "0", mu return ug boolean na false sa
+    //searchExactTerm() na method then mu return to na method - Rulona, Maddie L.
     public static boolean displayResult(int resultIndex, String response) {
         if (response.equals("0")) {
             System.out.println("Exiting...");
             return false;
         } else if (resultIndex != -1) {
             System.out.println("Result: " + Data.data[resultIndex]);
-        } else {
+        } else {//Enhanced by Felix
             System.out.println("Word not found");
             suggestWords(cleanInput);
         }
@@ -113,7 +140,7 @@ public class IT_Dictionary {
             System.out.print("Search an IT term (Enter 0 to return): ");
             String response = input.nextLine();
             cleanInput = response.trim();
-
+            //Filtering the user input Albarico (Enhanced)
             if (cleanInput.isEmpty()) {
                 System.out.println("ERROR: Please enter a word. Input Cannot be blank.");
                 continue;
@@ -126,19 +153,20 @@ public class IT_Dictionary {
             addToHistory(cleanInput);
         }
     }
-
+//Showing of listing the terms -Albarico, Jason D.
     static void showAllTerms() {
         System.out.println("\n [ALL TERMS]");
         for (int i = 0; i < Data.data.length; i++) {
             if (Data.data[i] != null) {
                 String termOnly = Data.data[i].split(":")[0].trim();
-                System.out.println("=| " + termOnly + " |=");
+                System.out.println("| " + termOnly + " |");
             }
         }
         System.out.println("------------");
         pause();
     }
 
+// Will pick a single random term, and its definition per run - Famoso, Gilmer C.
     static void showRandomTerm() {
         if (Data.data.length > 0) {
             int index = random.nextInt(Data.data.length);
@@ -150,7 +178,7 @@ public class IT_Dictionary {
         }
         pause();
     }
-
+// para ma store ang recent searches sa user - Biando, Marc Terence B.
     static void addToHistory(String term) {
         if (term == null || term.trim().isEmpty()) return;
 
@@ -163,8 +191,11 @@ public class IT_Dictionary {
             searchHistory[historyCount++] = term;
         }
     }
+// para ma display ang recent searches gikan latest padulong oldest - Biando, Marc Terence B.
 
     static void showSearchHistory() {
+     
+        
         System.out.println("\n[RECENT SEARCHES]");
         if (historyCount == 0) {
             System.out.println("No searches yet.");
@@ -177,11 +208,13 @@ public class IT_Dictionary {
         pause();
     }
 
+//Just a method that asks the press enter to continue - Famoso, Gilmer C.
     static void pause() {
         System.out.print("Press Enter to continue...");
         input.nextLine();
     }
 
+//Will check if it's truly an integer and if it’s a valid value - Famoso, Gilmer C.
     static int readInt(String prompt) {
         while (true) {
             System.out.print(prompt);
@@ -193,8 +226,9 @@ public class IT_Dictionary {
             }
         }
     }
-
+    // Jeskyle A. Ranises - algorithm para makuha ang distance
     public static int levenshteinDistance(String a, String b) {
+        
         int[][] dp = new int[a.length() + 1][b.length() + 1];
         for (int i = 0; i <= a.length(); i++) dp[i][0] = i;
         for (int j = 0; j <= b.length(); j++) dp[0][j] = j;
@@ -208,7 +242,7 @@ public class IT_Dictionary {
         }
         return dp[a.length()][b.length()];
     }
-
+    // Joseph Divino - method for suggest word if ma mispelled using lavenshtein algorithm
     public static void suggestWords(String inputStr) {
         System.out.println("Suggestions:");
         int maxDistance = 3;
@@ -217,7 +251,14 @@ public class IT_Dictionary {
         // First Pass: Prefix matching
         for (int i = 0; i < Data.data.length; i++) {
             if (Data.data[i] == null) continue;
+            
             String word = Data.data[i].split(":")[0].trim();
+            
+// word.toLowerCase() i convert into lowercase ang i input sa user - Monsales
+// .startsWith(inputStr.toLowerCase() an use ani niya is i check kung ang gi input sa user nag match sa mga data (exmple: if si user nag enter ug pr, i display niya tanan wordsna nag start sa pr) - Monsales
+//System.out.println("- " + word); meaning i print niya ang dash (-) plus ang word - Monsales
+//   hasStartsWith = true; meaning if nag match na ang gi input sa user meaning found na ang word - Monsales
+
             if (word.toLowerCase().startsWith(inputStr.toLowerCase())) {
                 System.out.println("- " + word);
                 hasStartsWith = true;
@@ -243,3 +284,5 @@ public class IT_Dictionary {
         }
     }
 }
+
+
