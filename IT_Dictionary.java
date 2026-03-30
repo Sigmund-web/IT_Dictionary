@@ -49,6 +49,7 @@ System.out.println("[ * WORD OF THE DAY * ]");
             System.out.println("2. Show random term");
             System.out.println("3. Show all Terms");
             System.out.println("4. Search History");
+			 System.out.println("5. Take a quiz");
             System.out.println("0. Exit");
             System.out.println("==================================================");
 
@@ -71,12 +72,12 @@ System.out.println("[ * WORD OF THE DAY * ]");
                 case 4:
                     showSearchHistory();
                     clearConsole();
-                    Break;
-case 5:
-       takeQuiz();
-clearConsole();break;
-
-                case 0:
+                    break;
+				case 5: // Andre servidor nag add og choice - nasa baba ang sumpay ana
+      				 takeQuiz();
+					 clearConsole();
+					break;
+				 case 0:
                     clearConsole();
                     System.out.println("Exiting dictionary. Goodbye!");
                     break;
@@ -283,6 +284,66 @@ clearConsole();break;
             }
         }
     }
+} 
+
+ static void takeQuiz() {
+        System.out.println("\n--- IT DICTIONARY QUIZ ---"); //Servidor,Andre ni tanan sa baba
+
+        String[][] questions = { //question including mga multiple choices
+            {"What does CPU stand for?", "Central Processing Unit", "Computer Processing Unit", "Control Processing Unit", "Central Program Unit", "1"},
+            {"What is RAM?", "Random Access Memory", "Readily Available Memory", "Rapid Application Module", "Random Active Module", "1"},
+            {"What does DNS do?", "Translates domain names to IP addresses", "Manages database servers", "Encrypts network traffic", "Connects devices to Wi-Fi", "1"},
+            {"What is HTTPS?", "Secure protocol for websites", "High Transfer Protocol System", "Hyper Text Technical Script", "Hardware Transfer Protocol Secure", "1"},
+            {"What is a firewall?", "Protects network from unauthorized access", "Connects two networks", "Stores data temporarily", "A type of CPU", "1"}
+        };
+
+        // mag himo syag question
+        int[] indexes = new int[questions.length];
+
+        // fill indexes: 0,1,2,3,4
+        for (int i = 0; i < indexes.length; i++) {
+            indexes[i] = i;
+        }
+
+        // Mao naning mag shuffles ang question
+        for (int i = indexes.length - 1; i > 0; i--) {
+            int j = random.nextInt(i + 1);
+
+            // swap
+            int temp = indexes[i];
+            indexes[i] = indexes[j];
+            indexes[j] = temp;
+        }
+
+        int score = 0;
+
+        // mag display sya og 5 questionx
+        for (int i = 0; i < 5; i++) {
+            int idx = indexes[i];
+
+            System.out.println("\nQ" + (i + 1) + ": " + questions[idx][0]);
+            System.out.println("1. " + questions[idx][1]);
+            System.out.println("2. " + questions[idx][2]);
+            System.out.println("3. " + questions[idx][3]);
+            System.out.println("4. " + questions[idx][4]);
+
+            System.out.print("Your answer (1-4): ");
+            String answer = input.nextLine();
+
+            if (answer.equals(questions[idx][5])) {
+                System.out.println("Correct!");
+                score++;
+            } else {
+                int correctOption = Integer.parseInt(questions[idx][5]);
+                System.out.println("Wrong! Correct answer: " + questions[idx][correctOption]);
+            }
+        }
+
+        System.out.println("\nYour total score: " + score + "/5");  // imohang score kung pila
+
+        pause();
+    }
+    
 }
 
 
