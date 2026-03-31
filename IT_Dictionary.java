@@ -25,7 +25,9 @@ public class IT_Dictionary {
  int wordOfTheDayIndex = random.nextInt(Data.data.length);
             wordOfTheDay = Data.data[wordOfTheDayIndex];
         }
-        
+         System.out.println("==================================================");
+            System.out.println("            ---IT DICTIONARY---");
+            System.out.println("==================================================");
         run();
     }
 // added while loop para di mag balik2 og run ang user sa program - Guino-o, Benedict E. (before ang menu gi add)
@@ -34,9 +36,7 @@ public class IT_Dictionary {
     static void run() {
         int choice;
         do {
-            System.out.println("==================================================");
-            System.out.println("            ---IT DICTIONARY---");
-            System.out.println("==================================================");
+           
             
 
 
